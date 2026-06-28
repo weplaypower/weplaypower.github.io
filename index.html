@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title data-i18n="metaTitle">WePlayPower - 单机游戏修改器</title>
+    <style>
+        :root {
+            --bg: #0a0a0c;
+            --bg-soft: #141416;
+            --card: #141416;
+            --text: #e4e4e7;
+            --text-heading: #fafafa;
+            --text-muted: #a1a1aa;
+            --text-dim: #71717a;
+            --border: #232326;
+            --border-hover: #3f3f46;
+            --accent: #c4b5fd;
+            --btn-bg: linear-gradient(135deg, #7c3aed, #2563eb);
+            --hero-bg: radial-gradient(ellipse at top, #1a1029 0%, #0a0a0c 60%);
+            --buy-bg: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(37,99,235,0.08));
+            --free-bg: linear-gradient(90deg, rgba(124,58,237,0.10), rgba(37,99,235,0.06));
+            --shadow: rgba(124, 58, 237, 0.35);
+        }
+        [data-theme="light"] {
+            --bg: #fafafa;
+            --bg-soft: #ffffff;
+            --card: #ffffff;
+            --text: #27272a;
+            --text-heading: #18181b;
+            --text-muted: #52525b;
+            --text-dim: #71717a;
+            --border: #e4e4e7;
+            --border-hover: #d4d4d8;
+            --accent: #7c3aed;
+            --btn-bg: linear-gradient(135deg, #7c3aed, #2563eb);
+            --hero-bg: radial-gradient(ellipse at top, #f3e8ff 0%, #fafafa 60%);
+            --buy-bg: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(37,99,235,0.04));
+            --free-bg: linear-gradient(90deg, rgba(124,58,237,0.06), rgba(37,99,235,0.03));
+            --shadow: rgba(124, 58, 237, 0.20);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            transition: background .3s, color .3s;
+        }
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+        .toolbar {
+            position: fixed; top: 16px; right: 16px;
+            display: flex; gap: 10px; z-index: 100;
+        }
+        .toolbar button {
+            background: var(--card); color: var(--text);
+            border: 1px solid var(--border); border-radius: 10px;
+            padding: 8px 14px; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: border-color .2s, transform .1s;
+        }
+        .toolbar button:hover { border-color: var(--border-hover); }
+        .toolbar button:active { transform: scale(0.97); }
+        header {
+            position: relative;
+            padding: 92px 0 60px;
+            text-align: center;
+            background: var(--hero-bg);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .hero-slider {
+            position: absolute; inset: 0;
+            z-index: 0;
+        }
+        .hero-slider .slide {
+            position: absolute; inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 1.2s ease-in-out, transform 8s ease-out;
+        }
+        .hero-slider .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .hero-slider::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(10, 10, 12, 0.72);
+            transition: background .3s;
+        }
+        [data-theme="light"] .hero-slider::after {
+            background: rgba(250, 250, 250, 0.82);
+        }
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+        .logo-img {
+            width: 110px; height: 110px;
+            margin: 0 auto 28px;
+            object-fit: contain;
+            filter: drop-shadow(0 16px 40px var(--shadow));
+        }
+        h1 { font-size: 46px; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.02em; color: var(--text-heading); }
+        .slogan {
+            font-size: 22px; font-weight: 600; color: var(--accent);
+            margin-bottom: 14px;
+        }
+        .tagline { font-size: 19px; color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; }
+        .hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+        .badge {
+            padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            background: var(--bg-soft); color: var(--text); border: 1px solid var(--border);
+        }
+        .badge.primary { background: rgba(124, 58, 237, 0.14); color: var(--accent); border-color: rgba(124, 58, 237, 0.30); }
+        [data-theme="light"] .badge.primary { background: rgba(124, 58, 237, 0.10); }
+        .cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--btn-bg); color: #fff;
+            padding: 16px 36px; border-radius: 12px; font-weight: 700; font-size: 17px;
+        }
+        .cta:hover { text-decoration: none; opacity: .92; }
+        .cta-sub { display: block; margin-top: 14px; color: var(--text-dim); font-size: 13px; }
+
+        main { padding: 72px 0; }
+        section { margin-bottom: 80px; }
+        h2 { font-size: 30px; font-weight: 700; margin-bottom: 20px; text-align: center; color: var(--text-heading); }
+        .section-desc { color: var(--text-muted); text-align: center; max-width: 620px; margin: -8px auto 36px; }
+
+        .features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px;
+        }
+        .feature {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px;
+            transition: transform .2s, border-color .2s;
+        }
+        .feature:hover { transform: translateY(-4px); border-color: var(--border-hover); }
+        .feature-icon { font-size: 30px; margin-bottom: 14px; }
+        .feature h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text-heading); }
+        .feature p { font-size: 15px; color: var(--text-muted); margin-bottom: 0; }
+
+        .steps {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+            counter-reset: step; list-style: none;
+        }
+        .steps li {
+            background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px;
+            position: relative; padding-top: 62px;
+        }
+        .steps li::before {
+            counter-increment: step; content: counter(step);
+            position: absolute; left: 28px; top: 24px;
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--btn-bg); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+        }
+        .steps h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text-heading); }
+        .steps p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+
+        .games {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+        }
+        .game-tag {
+            background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px;
+            padding: 10px 18px; font-size: 14px; color: var(--text); font-weight: 500;
+        }
+
+        .faq { max-width: 760px; margin: 0 auto; }
+        .faq-item {
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 22px 26px; margin-bottom: 14px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-heading); }
+        .faq-item p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+
+        .buy-box {
+            background: var(--buy-bg);
+            border: 1px solid rgba(124,58,237,0.25); border-radius: 24px;
+            padding: 48px 36px; text-align: center;
+        }
+        [data-theme="light"] .buy-box { border-color: rgba(124,58,237,0.15); }
+        .buy-box h2 { margin-bottom: 14px; }
+        .buy-box p { color: var(--text-muted); max-width: 560px; margin: 0 auto 28px; }
+        .free-note {
+            background: var(--free-bg);
+            border: 1px dashed rgba(124,58,237,0.35);
+            border-radius: 14px;
+            padding: 16px 22px;
+            text-align: center;
+            color: var(--text);
+            font-size: 15px;
+            margin-top: 18px;
+        }
+        [data-theme="light"] .free-note { border-color: rgba(124,58,237,0.22); }
+        .free-note strong { color: var(--accent); }
+        .price { font-size: 42px; font-weight: 800; color: var(--text-heading); margin-bottom: 8px; }
+        .price-note { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
+
+        footer {
+            text-align: center; padding: 44px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 14px;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 34px; }
+            h2 { font-size: 24px; }
+            header { padding: 76px 0 44px; }
+            .price { font-size: 34px; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="toolbar">
+        <button id="langBtn" aria-label="Switch language">English</button>
+        <button id="themeBtn" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+    </div>
+
+    <header>
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide" style="background-image:url('bg1.jpg')"></div>
+            <div class="slide" style="background-image:url('bg2.jpg')"></div>
+            <div class="slide" style="background-image:url('bg3.jpg')"></div>
+        </div>
+        <div class="container">
+            <img class="logo-img" src="logo.png" alt="WePlayPower Logo">
+            <h1>WePlayPower</h1>
+            <p class="slogan" data-i18n="slogan">让我们的游戏更强大</p>
+            <p class="tagline" data-i18n="tagline">一键开启单机游戏的无限可能，免账号、可离线、小白也能轻松上手。</p>
+            <div class="hero-badges">
+                <span class="badge primary" data-i18n="badgeNoAccount">免账号</span>
+                <span class="badge primary" data-i18n="badgeOffline">可离线使用</span>
+                <span class="badge" data-i18n="badgeSteam">Steam 游戏支持</span>
+                <span class="badge" data-i18n="badgeLicense">授权码激活</span>
+            </div>
+            <a class="cta" href="#buy" data-i18n="ctaHero">免费下载体验</a>
+            <span class="cta-sub" data-i18n="ctaHeroSub">部分功能免激活可用，授权码解锁完整能力</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h2 data-i18n="whyTitle">为什么选择 WePlayPower？</h2>
+            <p class="section-desc" data-i18n="whyDesc">告别繁琐的在线平台，WePlayPower 把全部能力放在你的电脑上，简单、稳定、私密。未激活也能体验部分修改功能。</p>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
+                    <h3 data-i18n="feat1Title">无需账号，保护隐私</h3>
+                    <p data-i18n="feat1Desc">不用手机号、不用邮箱注册，不收集你的游戏记录和个人信息，所有数据只保存在本地。</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                    <h3 data-i18n="feat2Title">离线也能用</h3>
+                    <p data-i18n="feat2Desc">激活后无需联网验证，出门在外、网络受限也能随时开启你喜欢的游戏修改功能。</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><path d="M6 11h4M6 16h4M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4"/><path d="M15 3h6v6M21 3l-7 7"/></svg></div>
+                    <h3 data-i18n="feat3Title">海量游戏支持</h3>
+                    <p data-i18n="feat3Desc">支持数千款热门单机游戏，从 3A 大作到独立精品，持续更新游戏库和修改项。</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                    <h3 data-i18n="feat4Title">Steam / 直接启动都支持</h3>
+                    <p data-i18n="feat4Desc">无论是 Steam 正版游戏，还是本地安装包，都能自动识别进程并一键启动修改。</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 12l2 2 4-4"/></svg></div>
+                    <h3 data-i18n="feat5Title">界面简洁，小白也会用</h3>
+                    <p data-i18n="feat5Desc">打开软件就能看到游戏列表，选中游戏、点击修改项即可生效，没有复杂的配置和命令。</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                    <h3 data-i18n="feat6Title">授权灵活，可续期</h3>
+                    <p data-i18n="feat6Desc">按授权码有效期使用，到期后可续期；一机一码，设备绑定，使用更安心。</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 data-i18n="stepsTitle">三步开始使用</h2>
+            <p class="section-desc" data-i18n="stepsDesc">不需要懂技术，跟着做就行。</p>
+            <ol class="steps">
+                <li>
+                    <h3 data-i18n="step1Title">下载安装</h3>
+                    <p data-i18n="step1Desc">获取安装包，像普通软件一样安装到电脑上。</p>
+                </li>
+                <li>
+                    <h3 data-i18n="step2Title">输入授权码</h3>
+                    <p data-i18n="step2Desc">在软件内填入购买的授权码，完成设备绑定即可激活。</p>
+                </li>
+                <li>
+                    <h3 data-i18n="step3Title">选择游戏开玩</h3>
+                    <p data-i18n="step3Desc">从游戏列表中选择想修改的游戏，勾选需要的功能，立即生效。</p>
+                </li>
+            </ol>
+        </section>
+
+        <section>
+            <h2 data-i18n="gamesTitle">支持的游戏类型</h2>
+            <p class="section-desc" data-i18n="gamesDesc">涵盖主流单机游戏平台与类型，持续扩充中。</p>
+            <div class="games">
+                <span class="game-tag" data-i18n="tagSteam">Steam 正版游戏</span>
+                <span class="game-tag" data-i18n="tagAction">动作冒险</span>
+                <span class="game-tag" data-i18n="tagRPG">角色扮演 RPG</span>
+                <span class="game-tag" data-i18n="tagOpenWorld">开放世界</span>
+                <span class="game-tag" data-i18n="tagSurvival">生存建造</span>
+                <span class="game-tag" data-i18n="tagStrategy">策略战棋</span>
+                <span class="game-tag" data-i18n="tagRacing">竞速体育</span>
+                <span class="game-tag" data-i18n="tagHorror">恐怖解谜</span>
+                <span class="game-tag" data-i18n="tagIndie">独立精品</span>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2 data-i18n="faqTitle">常见问题</h2>
+            <div class="faq-item">
+                <h3 data-i18n="faq1Title">不购买授权码能用吗？</h3>
+                <p data-i18n="faq1Desc">可以。下载安装后无需付费即可使用部分基础修改功能。购买授权码后可解锁完整游戏库与高级功能。</p>
+            </div>
+            <div class="faq-item">
+                <h3 data-i18n="faq2Title">需要联网才能用吗？</h3>
+                <p data-i18n="faq2Desc">首次激活需要联网或获取授权码，激活后即可离线使用，游戏数据和修改功能都在本地运行。</p>
+            </div>
+            <div class="faq-item">
+                <h3 data-i18n="faq3Title">支持多少台电脑？</h3>
+                <p data-i18n="faq3Desc">一个授权码默认绑定一台设备。如需更换设备或有企业多机需求，可联系客服处理。</p>
+            </div>
+            <div class="faq-item">
+                <h3 data-i18n="faq4Title">会不会被封号？</h3>
+                <p data-i18n="faq4Desc">WePlayPower 主要用于单机游戏体验，请勿在联网对战或反作弊严格的在线游戏中使用，避免账号风险。</p>
+            </div>
+            <div class="faq-item">
+                <h3 data-i18n="faq5Title">授权到期后怎么办？</h3>
+                <p data-i18n="faq5Desc">授权到期后，可在软件内输入新的授权码续期，原有设置和游戏数据不会丢失。</p>
+            </div>
+        </section>
+
+        <section id="buy">
+            <div class="buy-box">
+                <img class="logo-img" src="logo.png" alt="WePlayPower Logo" style="width:72px;height:72px;margin-bottom:22px;">
+                <h2 data-i18n="buyTitle">免费体验，按需升级</h2>
+                <p data-i18n="buyDesc">下载安装后即可使用部分修改功能。如需解锁全部游戏和高级功能，可购买授权码激活。</p>
+                <div class="price" data-i18n="price">部分功能免费</div>
+                <div class="price-note" data-i18n="priceNote">授权码可解锁完整游戏库与高级能力</div>
+                <a class="cta" href="mailto:support@weplaypower.com" data-i18n="buyCta">联系官方客服</a>
+                <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权。</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-i18n="footer">&copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。</p>
+        </div>
+    </footer>
+
+    <script>
+        const i18n = {
+            zh: {
+                metaTitle: "WePlayPower - 单机游戏修改器",
+                slogan: "让我们的游戏更强大",
+                tagline: "一键开启单机游戏的无限可能，免账号、可离线、小白也能轻松上手。",
+                badgeNoAccount: "免账号",
+                badgeOffline: "可离线使用",
+                badgeSteam: "Steam 游戏支持",
+                badgeLicense: "授权码激活",
+                ctaHero: "免费下载体验",
+                ctaHeroSub: "部分功能免激活可用，授权码解锁完整能力",
+                whyTitle: "为什么选择 WePlayPower？",
+                whyDesc: "告别繁琐的在线平台，WePlayPower 把全部能力放在你的电脑上，简单、稳定、私密。未激活也能体验部分修改功能。",
+                feat1Title: "无需账号，保护隐私",
+                feat1Desc: "不用手机号、不用邮箱注册，不收集你的游戏记录和个人信息，所有数据只保存在本地。",
+                feat2Title: "离线也能用",
+                feat2Desc: "激活后无需联网验证，出门在外、网络受限也能随时开启你喜欢的游戏修改功能。",
+                feat3Title: "海量游戏支持",
+                feat3Desc: "支持数千款热门单机游戏，从 3A 大作到独立精品，持续更新游戏库和修改项。",
+                feat4Title: "Steam / 直接启动都支持",
+                feat4Desc: "无论是 Steam 正版游戏，还是本地安装包，都能自动识别进程并一键启动修改。",
+                feat5Title: "界面简洁，小白也会用",
+                feat5Desc: "打开软件就能看到游戏列表，选中游戏、点击修改项即可生效，没有复杂的配置和命令。",
+                feat6Title: "授权灵活，可续期",
+                feat6Desc: "按授权码有效期使用，到期后可续期；一机一码，设备绑定，使用更安心。",
+                stepsTitle: "三步开始使用",
+                stepsDesc: "不需要懂技术，跟着做就行。",
+                step1Title: "下载安装",
+                step1Desc: "获取安装包，像普通软件一样安装到电脑上。",
+                step2Title: "输入授权码",
+                step2Desc: "在软件内填入购买的授权码，完成设备绑定即可激活。",
+                step3Title: "选择游戏开玩",
+                step3Desc: "从游戏列表中选择想修改的游戏，勾选需要的功能，立即生效。",
+                gamesTitle: "支持的游戏类型",
+                gamesDesc: "涵盖主流单机游戏平台与类型，持续扩充中。",
+                tagSteam: "Steam 正版游戏",
+                tagAction: "动作冒险",
+                tagRPG: "角色扮演 RPG",
+                tagOpenWorld: "开放世界",
+                tagSurvival: "生存建造",
+                tagStrategy: "策略战棋",
+                tagRacing: "竞速体育",
+                tagHorror: "恐怖解谜",
+                tagIndie: "独立精品",
+                faqTitle: "常见问题",
+                faq1Title: "不购买授权码能用吗？",
+                faq1Desc: "可以。下载安装后无需付费即可使用部分基础修改功能。购买授权码后可解锁完整游戏库与高级功能。",
+                faq2Title: "需要联网才能用吗？",
+                faq2Desc: "首次激活需要联网或获取授权码，激活后即可离线使用，游戏数据和修改功能都在本地运行。",
+                faq3Title: "支持多少台电脑？",
+                faq3Desc: "一个授权码默认绑定一台设备。如需更换设备或有企业多机需求，可联系客服处理。",
+                faq4Title: "会不会被封号？",
+                faq4Desc: "WePlayPower 主要用于单机游戏体验，请勿在联网对战或反作弊严格的在线游戏中使用，避免账号风险。",
+                faq5Title: "授权到期后怎么办？",
+                faq5Desc: "授权到期后，可在软件内输入新的授权码续期，原有设置和游戏数据不会丢失。",
+                buyTitle: "免费体验，按需升级",
+                buyDesc: "下载安装后即可使用部分修改功能。如需解锁全部游戏和高级功能，可购买授权码激活。",
+                price: "部分功能免费",
+                priceNote: "授权码可解锁完整游戏库与高级能力",
+                buyCta: "联系官方客服",
+                freeLabel: "免费用户",
+                freeNote: "可以直接使用部分基础修改功能，无需先购买授权。",
+                footer: "\u0026copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。"
+            },
+            en: {
+                metaTitle: "WePlayPower - Single Player Game Trainer",
+                slogan: "Make Our Games Stronger",
+                tagline: "Unlock endless possibilities for single-player games. No account, works offline, easy for everyone.",
+                badgeNoAccount: "No Account",
+                badgeOffline: "Works Offline",
+                badgeSteam: "Steam Games",
+                badgeLicense: "License Key",
+                ctaHero: "Free Download",
+                ctaHeroSub: "Some features are free; license unlocks the full library.",
+                whyTitle: "Why WePlayPower?",
+                whyDesc: "Say goodbye to complicated online platforms. WePlayPower puts everything on your PC—simple, stable, and private. Some features are available even without activation.",
+                feat1Title: "No Account Needed",
+                feat1Desc: "No phone number or email required. We don't collect your game history or personal info—everything stays local.",
+                feat2Title: "Works Offline",
+                feat2Desc: "Once activated, no internet is needed. Use your favorite game boosts anywhere, even with limited connectivity.",
+                feat3Title: "Massive Game Support",
+                feat3Desc: "Supports thousands of popular single-player games, from AAA titles to indie gems, with a constantly growing library.",
+                feat4Title: "Steam & Direct Launch",
+                feat4Desc: "Automatically detects processes for both Steam games and local installs, and starts mods with one click.",
+                feat5Title: "Simple for Everyone",
+                feat5Desc: "Open the app, pick a game, toggle the boosts you want. No complex setup or commands.",
+                feat6Title: "Flexible License",
+                feat6Desc: "Use by license duration and renew when needed. One device per key for secure, worry-free usage.",
+                stepsTitle: "Get Started in 3 Steps",
+                stepsDesc: "No technical knowledge required—just follow along.",
+                step1Title: "Download & Install",
+                step1Desc: "Get the installer and set it up like any regular app.",
+                step2Title: "Enter License Key",
+                step2Desc: "Enter your purchased license key in the app to bind your device and activate.",
+                step3Title: "Pick a Game & Play",
+                step3Desc: "Choose a game from the list, select the boosts you want, and they take effect instantly.",
+                gamesTitle: "Supported Game Types",
+                gamesDesc: "Covers major platforms and genres, with more added regularly.",
+                tagSteam: "Steam Games",
+                tagAction: "Action Adventure",
+                tagRPG: "RPG",
+                tagOpenWorld: "Open World",
+                tagSurvival: "Survival Crafting",
+                tagStrategy: "Strategy",
+                tagRacing: "Racing & Sports",
+                tagHorror: "Horror & Puzzle",
+                tagIndie: "Indie Gems",
+                faqTitle: "FAQ",
+                faq1Title: "Can I use it without buying a license?",
+                faq1Desc: "Yes. After installing, some basic boosts are available for free. A license unlocks the full game library and advanced features.",
+                faq2Title: "Does it require internet?",
+                faq2Desc: "Initial activation requires internet or a license key. After that, it works offline, with all game data and boosts running locally.",
+                faq3Title: "How many PCs are supported?",
+                faq3Desc: "One license key is bound to one device by default. Contact support for device transfers or enterprise multi-device plans.",
+                faq4Title: "Can I get banned?",
+                faq4Desc: "WePlayPower is designed for single-player experiences. Avoid using it in online multiplayer or games with strict anti-cheat to protect your account.",
+                faq5Title: "What happens when my license expires?",
+                faq5Desc: "When your license expires, you can enter a new key to renew. Your settings and game data will remain intact.",
+                buyTitle: "Try Free, Upgrade Anytime",
+                buyDesc: "Download and use some boosts right away. Purchase a license key to unlock the full library and advanced features.",
+                price: "Free Features Available",
+                priceNote: "License unlocks the full game library and advanced features",
+                buyCta: "Contact Official Support",
+                freeLabel: "Free Users",
+                freeNote: "Can use some basic boosts directly without purchasing a license first.",
+                footer: "\u0026copy; 2026 WePlayPower. All rights reserved. Unauthorized copying, distribution, or reverse engineering is prohibited."
+            }
+        };
+
+        let lang = localStorage.getItem('wpp_lang') || 'zh';
+        let theme = localStorage.getItem('wpp_theme') || 'dark';
+
+        function applyLang() {
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key] !== undefined) {
+                    el.innerHTML = i18n[lang][key];
+                }
+            });
+            langBtn.textContent = lang === 'zh' ? 'English' : '中文';
+        }
+
+        function applyTheme() {
+            document.body.setAttribute('data-theme', theme);
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        langBtn.addEventListener('click', () => {
+            lang = lang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('wpp_lang', lang);
+            applyLang();
+        });
+
+        themeBtn.addEventListener('click', () => {
+            theme = theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('wpp_theme', theme);
+            applyTheme();
+        });
+
+        applyLang();
+        applyTheme();
+
+        // Hero background carousel
+        const slides = document.querySelectorAll('#heroSlider .slide');
+        let currentSlide = 0;
+        if (slides.length) {
+            slides[0].classList.add('active');
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
