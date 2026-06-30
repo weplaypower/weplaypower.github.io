@@ -48,6 +48,10 @@
             background: var(--bg);
             transition: background .3s, color .3s;
         }
+        header, main, footer {
+            position: relative;
+            z-index: 1;
+        }
         .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
         .toolbar {
             position: fixed; top: 16px; right: 16px;
@@ -65,34 +69,75 @@
             position: relative;
             padding: 92px 0 60px;
             text-align: center;
-            background: var(--hero-bg);
+            background:
+                radial-gradient(ellipse at top, rgba(26, 16, 41, 0.54) 0%, rgba(10, 10, 12, 0.18) 60%),
+                linear-gradient(180deg, rgba(10, 10, 12, 0.08), rgba(10, 10, 12, 0.44));
             border-bottom: 1px solid var(--border);
             overflow: hidden;
         }
         .hero-slider {
-            position: absolute; inset: 0;
+            position: fixed; inset: 0;
             z-index: 0;
+            overflow: hidden;
+            background: #05050c;
+            pointer-events: none;
         }
-        .hero-slider .slide {
+        .hero-marquee-track {
+            position: absolute;
+            inset: -6% auto -6% 0;
+            display: flex;
+            height: 112%;
+            width: max-content;
+            animation: heroPanorama 42s linear infinite;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+        }
+        .hero-marquee-track img {
+            display: block;
+            height: 100%;
+            width: auto;
+            min-width: 100vw;
+            object-fit: cover;
+            flex: 0 0 auto;
+            filter: saturate(1.08) contrast(1.04);
+        }
+        .hero-slider::before {
+            content: '';
             position: absolute; inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transform: scale(1.05);
-            transition: opacity 1.2s ease-in-out, transform 8s ease-out;
-        }
-        .hero-slider .slide.active {
-            opacity: 1;
-            transform: scale(1);
+            z-index: 1;
+            background:
+                radial-gradient(circle at 50% 42%, rgba(124, 58, 237, 0.2), transparent 44%),
+                linear-gradient(90deg, rgba(10, 10, 12, 0.72), rgba(10, 10, 12, 0.28) 48%, rgba(10, 10, 12, 0.78));
         }
         .hero-slider::after {
             content: '';
             position: absolute; inset: 0;
-            background: rgba(10, 10, 12, 0.72);
+            z-index: 2;
+            background: rgba(10, 10, 12, 0.48);
             transition: background .3s;
         }
+        @keyframes heroPanorama {
+            from { transform: translate3d(0, 0, 0); }
+            to { transform: translate3d(-50%, 0, 0); }
+        }
         [data-theme="light"] .hero-slider::after {
-            background: rgba(250, 250, 250, 0.82);
+            background: rgba(250, 250, 250, 0.62);
+        }
+        [data-theme="light"] .hero-slider::before {
+            background:
+                radial-gradient(circle at 50% 42%, rgba(124, 58, 237, 0.14), transparent 44%),
+                linear-gradient(90deg, rgba(250, 250, 250, 0.78), rgba(250, 250, 250, 0.34) 48%, rgba(250, 250, 250, 0.82));
+        }
+        [data-theme="light"] header {
+            background:
+                radial-gradient(ellipse at top, rgba(243, 232, 255, 0.58) 0%, rgba(250, 250, 250, 0.24) 60%),
+                linear-gradient(180deg, rgba(250, 250, 250, 0.18), rgba(250, 250, 250, 0.56));
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-marquee-track {
+                animation: none;
+                transform: translate3d(-8%, 0, 0);
+            }
         }
         header .container {
             position: relative;
@@ -221,17 +266,18 @@
     </style>
 </head>
 <body data-theme="dark">
+    <div class="hero-slider" id="heroSlider" aria-hidden="true">
+        <div class="hero-marquee-track">
+            <img src="game-background-marquee.jpg" alt="">
+            <img src="game-background-marquee.jpg" alt="">
+        </div>
+    </div>
     <div class="toolbar">
         <button id="langBtn" aria-label="Switch language">English</button>
         <button id="themeBtn" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
     </div>
 
     <header>
-        <div class="hero-slider" id="heroSlider">
-            <div class="slide" style="background-image:linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)"></div>
-            <div class="slide" style="background-image:linear-gradient(135deg, #1a1029 0%, #4c1d95 50%, #0a0a0c 100%)"></div>
-            <div class="slide" style="background-image:linear-gradient(135deg, #000000 0%, #1e1b4b 50%, #000000 100%)"></div>
-        </div>
         <div class="container">
             <img class="logo-img" src="logo.png" alt="WePlayPower Logo">
             <h1>WePlayPower</h1>
@@ -531,17 +577,6 @@
         applyLang();
         applyTheme();
 
-        // Hero background carousel
-        const slides = document.querySelectorAll('#heroSlider .slide');
-        let currentSlide = 0;
-        if (slides.length) {
-            slides[0].classList.add('active');
-            setInterval(() => {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }, 5000);
-        }
     </script>
 </body>
 </html>
