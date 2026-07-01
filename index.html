@@ -731,8 +731,16 @@
             }
         };
 
+        const THEME_DEFAULT_VERSION = '2026-07-dark-default';
+        const THEME_DEFAULT_VERSION_KEY = 'wpp_theme_default_version';
         let lang = localStorage.getItem('wpp_lang') || 'zh';
-        let theme = localStorage.getItem('wpp_theme') || 'dark';
+        let storedTheme = localStorage.getItem('wpp_theme');
+        if (localStorage.getItem(THEME_DEFAULT_VERSION_KEY) !== THEME_DEFAULT_VERSION) {
+            storedTheme = 'dark';
+            localStorage.setItem('wpp_theme', storedTheme);
+            localStorage.setItem(THEME_DEFAULT_VERSION_KEY, THEME_DEFAULT_VERSION);
+        }
+        let theme = storedTheme === 'light' ? 'light' : 'dark';
 
         function applyLang() {
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
