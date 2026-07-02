@@ -795,8 +795,8 @@
             </div>
             <div class="nav-actions">
                 <button id="langBtn" class="nav-control" aria-label="Switch language">English</button>
-                <button id="themeBtn" class="nav-control" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
-                <a class="nav-download" href="WePlayPowerSetup.exe" download data-i18n="navDownload">立即下载</a>
+                <button id="themeBtn" class="nav-control" aria-label="Toggle theme"><span id="themeIcon">☀</span></button>
+                <a class="nav-download" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="navDownload">立即下载</a>
             </div>
         </div>
     </nav>
@@ -813,7 +813,7 @@
                 <span class="badge" data-i18n="badgeEasy">小白易用</span>
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
-            <a class="cta" href="WePlayPowerSetup.exe" download data-i18n="ctaHero">免费下载体验</a>
+            <a class="cta" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="ctaHero">免费下载体验</a>
             <span class="cta-sub" data-i18n="ctaHeroSub">部分功能免激活可用，授权码解锁完整能力</span>
         </div>
     </header>
@@ -990,11 +990,11 @@
                 <div class="price" data-i18n="price">部分功能免费</div>
                 <div class="price-note" data-i18n="priceNote">授权码可解锁完整游戏库与高级能力</div>
                 <div class="buy-actions">
-                    <a class="cta" href="WePlayPowerSetup.exe" download data-i18n="buyDownload">下载 Windows 安装包</a>
+                    <a class="cta" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="buyDownload">下载 Windows 安装包</a>
                     <a class="secondary-link" href="mailto:WePlayPower@gmail.com" data-i18n="buyCta">联系官方客服</a>
                 </div>
                 <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:WePlayPower@gmail.com">WePlayPower@gmail.com</a></div>
-                <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权。</span></div>
+                <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权码</span></div>
             </div>
         </section>
     </main>
@@ -1081,8 +1081,8 @@
                 buyCta: "联系官方客服",
                 contactLabel: "联系邮箱：",
                 freeLabel: "免费用户",
-                freeNote: "可以直接使用部分基础修改功能，无需先购买授权。",
-                footer: "\u0026copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。"
+                freeNote: "可以直接使用部分基础修改功能，无需先购买授权码",
+                footer: "&copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。"
             },
             en: {
                 metaTitle: "WePlayPower - Single Player Game Trainer",
@@ -1187,7 +1187,7 @@
 
         function applyTheme() {
             document.body.setAttribute('data-theme', theme);
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeIcon.textContent = theme === 'dark' ? '☀' : '🌙';
         }
 
         langBtn.addEventListener('click', () => {
@@ -1208,3 +1208,5 @@
     </script>
 </body>
 </html>
+
+
