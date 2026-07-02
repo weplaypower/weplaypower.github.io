@@ -266,6 +266,312 @@
         h2 { font-size: 30px; font-weight: 700; margin-bottom: 20px; text-align: center; color: var(--text-heading); }
         .section-desc { color: var(--text-muted); text-align: center; max-width: 620px; margin: -8px auto 36px; }
 
+        .product-showcase {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+            align-items: center;
+            gap: 34px;
+            padding: 34px;
+            border: 1px solid rgba(196, 181, 253, 0.16);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 82% 18%, rgba(52, 211, 153, 0.16), transparent 32%),
+                radial-gradient(circle at 20% 92%, rgba(124, 58, 237, 0.18), transparent 36%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+            overflow: hidden;
+        }
+        .product-showcase::before {
+            content: "";
+            position: absolute;
+            inset: auto 38px 28px auto;
+            width: 46%;
+            height: 28%;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.20);
+            filter: blur(34px);
+            pointer-events: none;
+        }
+        [data-theme="light"] .product-showcase {
+            border-color: rgba(124, 58, 237, 0.14);
+            background:
+                radial-gradient(circle at 82% 18%, rgba(52, 211, 153, 0.12), transparent 32%),
+                radial-gradient(circle at 20% 92%, rgba(124, 58, 237, 0.12), transparent 36%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(244, 244, 245, 0.74));
+            box-shadow: 0 24px 70px rgba(39, 39, 42, 0.10);
+        }
+        .product-copy {
+            position: relative;
+            z-index: 1;
+        }
+        .product-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            padding: 7px 12px;
+            border: 1px solid rgba(196, 181, 253, 0.24);
+            border-radius: 999px;
+            color: var(--accent);
+            background: rgba(124, 58, 237, 0.12);
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .product-copy h2 {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .product-copy p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 22px;
+        }
+        .product-points {
+            display: grid;
+            gap: 10px;
+            list-style: none;
+        }
+        .product-points li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .product-points li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #34d399, #60a5fa);
+            box-shadow: 0 0 18px rgba(52, 211, 153, 0.7);
+            flex: 0 0 auto;
+        }
+        .product-stage {
+            position: relative;
+            z-index: 1;
+            min-height: 410px;
+            perspective: 1200px;
+        }
+        .product-window {
+            position: absolute;
+            inset: 24px 0 18px 0;
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(8, 13, 24, 0.96), rgba(17, 24, 39, 0.90));
+            box-shadow:
+                0 36px 90px rgba(0, 0, 0, 0.42),
+                0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+            transform: rotateX(7deg) rotateY(-13deg) rotateZ(1deg);
+            transform-style: preserve-3d;
+        }
+        .product-window::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 34%, rgba(52, 211, 153, 0.10) 72%, transparent);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+        .product-sidebar {
+            padding: 16px 12px;
+            background: rgba(5, 10, 22, 0.72);
+            border-right: 1px solid rgba(148, 163, 184, 0.16);
+        }
+        .product-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            color: #e5e7eb;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        .product-brand img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+        .product-game-list {
+            display: grid;
+            gap: 8px;
+        }
+        .product-game {
+            display: grid;
+            grid-template-columns: 24px minmax(0, 1fr);
+            align-items: center;
+            gap: 8px;
+            min-height: 34px;
+            padding: 6px 8px;
+            border-radius: 10px;
+            color: rgba(226, 232, 240, 0.68);
+            font-size: 11px;
+            font-weight: 800;
+        }
+        .product-game span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .product-game-icon {
+            display: grid;
+            place-items: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 7px;
+            background: rgba(148, 163, 184, 0.14);
+            color: rgba(226, 232, 240, 0.8);
+            font-size: 11px;
+        }
+        .product-game.active {
+            color: #ecfeff;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.30), rgba(37, 99, 235, 0.20));
+            box-shadow: 0 10px 24px rgba(20, 184, 166, 0.16);
+        }
+        .product-game.active .product-game-icon {
+            color: #0f172a;
+            background: linear-gradient(135deg, #fde68a, #34d399);
+        }
+        .product-panel {
+            position: relative;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            min-width: 0;
+            padding: 18px;
+            background:
+                radial-gradient(circle at 74% 8%, rgba(251, 191, 36, 0.20), transparent 24%),
+                radial-gradient(circle at 92% 88%, rgba(37, 99, 235, 0.18), transparent 28%);
+        }
+        .product-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .product-panel-title span {
+            display: block;
+            color: rgba(203, 213, 225, 0.78);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .product-panel-title strong {
+            display: block;
+            color: #f8fafc;
+            font-size: 20px;
+            line-height: 26px;
+            font-weight: 900;
+        }
+        .product-status {
+            padding: 7px 11px;
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            border-radius: 999px;
+            color: #86efac;
+            background: rgba(22, 163, 74, 0.13);
+            font-size: 11px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+        .product-mod-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            align-content: start;
+        }
+        .product-mod {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 10px;
+            align-items: center;
+            min-height: 58px;
+            padding: 11px;
+            border: 1px solid rgba(148, 163, 184, 0.17);
+            border-radius: 13px;
+            background: rgba(15, 23, 42, 0.74);
+        }
+        .product-mod strong {
+            overflow: hidden;
+            color: #e2e8f0;
+            font-size: 13px;
+            line-height: 18px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .product-mod small {
+            display: block;
+            color: rgba(148, 163, 184, 0.88);
+            font-size: 10px;
+            line-height: 14px;
+            font-weight: 800;
+        }
+        .product-switch {
+            width: 34px;
+            height: 18px;
+            border-radius: 999px;
+            background: rgba(52, 211, 153, 0.26);
+            box-shadow: 0 0 18px rgba(52, 211, 153, 0.28);
+            position: relative;
+        }
+        .product-switch::after {
+            content: "";
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #bbf7d0;
+        }
+        .product-hotkey {
+            padding: 5px 8px;
+            border-radius: 7px;
+            color: #bae6fd;
+            background: rgba(14, 165, 233, 0.14);
+            font-size: 10px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+        .product-float-card {
+            position: absolute;
+            right: 4px;
+            bottom: 0;
+            z-index: 2;
+            width: min(220px, 42%);
+            padding: 13px;
+            border: 1px solid rgba(52, 211, 153, 0.28);
+            border-radius: 16px;
+            color: #e0f2fe;
+            background: rgba(5, 10, 22, 0.84);
+            box-shadow: 0 20px 52px rgba(0, 0, 0, 0.36);
+            transform: rotateX(7deg) rotateY(-9deg) translateZ(54px);
+            backdrop-filter: blur(14px);
+        }
+        .product-float-card span {
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 900;
+        }
+        .product-float-card strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 17px;
+            line-height: 22px;
+            color: #f8fafc;
+        }
+        .product-float-card small {
+            display: block;
+            margin-top: 4px;
+            color: rgba(186, 230, 253, 0.72);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
         .features {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px;
         }
@@ -382,6 +688,21 @@
                 scrollbar-width: none;
             }
             .nav-links::-webkit-scrollbar { display: none; }
+            .product-showcase {
+                grid-template-columns: 1fr;
+            }
+            .product-copy h2,
+            .product-copy p {
+                text-align: center;
+            }
+            .product-eyebrow,
+            .product-points {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .product-points {
+                max-width: 420px;
+            }
         }
         @media (max-width: 600px) {
             h1 { font-size: 34px; }
@@ -417,6 +738,38 @@
             }
             .buy-actions .cta,
             .buy-actions .secondary-link { width: 100%; }
+            .product-showcase {
+                padding: 22px 16px;
+            }
+            .product-stage {
+                min-height: 520px;
+                perspective: none;
+            }
+            .product-window {
+                inset: 0 0 82px 0;
+                grid-template-columns: 1fr;
+                transform: none;
+            }
+            .product-sidebar {
+                display: none;
+            }
+            .product-panel {
+                padding: 15px;
+            }
+            .product-panel-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .product-mod-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-float-card {
+                left: 12px;
+                right: 12px;
+                bottom: 0;
+                width: auto;
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -466,6 +819,73 @@
     </header>
 
     <main class="container">
+        <section id="product" class="product-showcase" aria-labelledby="productShowcaseTitle">
+            <div class="product-copy">
+                <div class="product-eyebrow" data-i18n="productEyebrow">产品界面预览</div>
+                <h2 id="productShowcaseTitle" data-i18n="productTitle">控制台式修改项管理</h2>
+                <p data-i18n="productDesc">以老头环修改项界面为例，开关、数值、快捷键都集中在同一屏，启动强化后按需调整即可。</p>
+                <ul class="product-points">
+                    <li data-i18n="productPoint1">修改项状态清晰可见</li>
+                    <li data-i18n="productPoint2">快捷键与数值操作同屏展示</li>
+                    <li data-i18n="productPoint3">暗系立体界面更贴近游戏场景</li>
+                </ul>
+            </div>
+            <div class="product-stage" aria-hidden="true">
+                <div class="product-window">
+                    <aside class="product-sidebar">
+                        <div class="product-brand"><img src="logo.png" alt=""> WPP</div>
+                        <div class="product-game-list">
+                            <div class="product-game"><i class="product-game-icon">RE</i><span>Resident Evil 4</span></div>
+                            <div class="product-game active"><i class="product-game-icon">ER</i><span>ELDEN RING</span></div>
+                            <div class="product-game"><i class="product-game-icon">MH</i><span>Monster Hunter Wilds</span></div>
+                            <div class="product-game"><i class="product-game-icon">R2</i><span>Red Dead Redemption 2</span></div>
+                            <div class="product-game"><i class="product-game-icon">AC</i><span>Assassin's Creed</span></div>
+                        </div>
+                    </aside>
+                    <div class="product-panel">
+                        <div class="product-panel-head">
+                            <div class="product-panel-title">
+                                <span>Steam · AppID 1245620</span>
+                                <strong>ELDEN RING</strong>
+                            </div>
+                            <div class="product-status">强化运行中</div>
+                        </div>
+                        <div class="product-mod-grid">
+                            <div class="product-mod">
+                                <div><strong>无限生命</strong><small>Num 1</small></div>
+                                <i class="product-switch"></i>
+                            </div>
+                            <div class="product-mod">
+                                <div><strong>无限专注</strong><small>Num 2</small></div>
+                                <i class="product-switch"></i>
+                            </div>
+                            <div class="product-mod">
+                                <div><strong>无限精力</strong><small>Num 3</small></div>
+                                <i class="product-switch"></i>
+                            </div>
+                            <div class="product-mod">
+                                <div><strong>卢恩倍率</strong><small>数值倍率</small></div>
+                                <span class="product-hotkey">x 8</span>
+                            </div>
+                            <div class="product-mod">
+                                <div><strong>一击破防</strong><small>Ctrl + Num 4</small></div>
+                                <i class="product-switch"></i>
+                            </div>
+                            <div class="product-mod">
+                                <div><strong>游戏速度</strong><small>Ctrl + / Ctrl -</small></div>
+                                <span class="product-hotkey">1.5x</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-float-card">
+                    <span>WePlayPower</span>
+                    <strong>启动强化成功</strong>
+                    <small>修改项已同步，快捷键可直接使用</small>
+                </div>
+            </div>
+        </section>
+
         <section id="features">
             <h2 data-i18n="whyTitle">为什么选择 WePlayPower？</h2>
             <p class="section-desc" data-i18n="whyDesc">告别繁琐的在线平台，WePlayPower 把全部能力放在你的电脑上，简单、稳定、私密。未激活也能体验部分修改功能。</p>
@@ -603,6 +1023,12 @@
                 badgeEasy: "小白易用",
                 ctaHero: "免费下载体验",
                 ctaHeroSub: "部分功能免激活可用，授权码解锁完整能力",
+                productEyebrow: "产品界面预览",
+                productTitle: "控制台式修改项管理",
+                productDesc: "以老头环修改项界面为例，开关、数值、快捷键都集中在同一屏，启动强化后按需调整即可。",
+                productPoint1: "修改项状态清晰可见",
+                productPoint2: "快捷键与数值操作同屏展示",
+                productPoint3: "暗系立体界面更贴近游戏场景",
                 whyTitle: "为什么选择 WePlayPower？",
                 whyDesc: "告别繁琐的在线平台，WePlayPower 把全部能力放在你的电脑上，简单、稳定、私密。未激活也能体验部分修改功能。",
                 feat1Title: "无需账号，保护隐私",
@@ -674,6 +1100,12 @@
                 badgeEasy: "Easy to Use",
                 ctaHero: "Free Download",
                 ctaHeroSub: "Some features are free; license unlocks the full library.",
+                productEyebrow: "Product Preview",
+                productTitle: "Control-panel boost management",
+                productDesc: "Using an Elden Ring boost screen as the example, toggles, values, and hotkeys stay together so you can adjust everything after power starts.",
+                productPoint1: "Boost status is clear at a glance",
+                productPoint2: "Hotkeys and value controls in one view",
+                productPoint3: "Dark 3D interface that feels made for games",
                 whyTitle: "Why WePlayPower?",
                 whyDesc: "Say goodbye to complicated online platforms. WePlayPower puts everything on your PC—simple, stable, and private. Some features are available even without activation.",
                 feat1Title: "No Account Needed",
