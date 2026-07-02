@@ -123,6 +123,9 @@
             gap: 10px;
             white-space: nowrap;
         }
+        .nav-download-wrap {
+            position: relative;
+        }
         .nav-control {
             background: rgba(255, 255, 255, 0.06);
             color: var(--text);
@@ -155,6 +158,67 @@
         .nav-download:hover {
             text-decoration: none;
             opacity: .94;
+        }
+        .download-popover {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 260px;
+            padding: 12px;
+            border: 1px solid rgba(196, 181, 253, 0.22);
+            border-radius: 16px;
+            background: rgba(15, 15, 18, 0.94);
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
+            backdrop-filter: blur(16px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+            z-index: 30;
+        }
+        [data-theme="light"] .download-popover {
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 22px 60px rgba(24, 24, 27, 0.16);
+        }
+        .nav-download-wrap:hover .download-popover,
+        .nav-download-wrap:focus-within .download-popover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .download-popover-title {
+            margin: 0 0 8px;
+            color: var(--text-heading);
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .download-way {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 11px;
+            border-radius: 12px;
+            color: var(--text-heading);
+            background: rgba(255, 255, 255, 0.055);
+        }
+        .download-way + .download-way { margin-top: 8px; }
+        .download-way:hover {
+            text-decoration: none;
+            background: rgba(124, 58, 237, 0.16);
+        }
+        [data-theme="light"] .download-way { background: rgba(24, 24, 27, 0.045); }
+        .download-way strong {
+            display: block;
+            font-size: 13px;
+            line-height: 1.15;
+        }
+        .download-way small {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-dim);
+            font-size: 11px;
+            line-height: 1.2;
         }
         header {
             position: relative;
@@ -254,12 +318,29 @@
         .badge.primary { background: rgba(124, 58, 237, 0.14); color: var(--accent); border-color: rgba(124, 58, 237, 0.30); }
         [data-theme="light"] .badge.primary { background: rgba(124, 58, 237, 0.10); }
         .cta {
-            display: inline-flex; align-items: center; gap: 8px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             background: var(--btn-bg); color: #fff;
             padding: 16px 36px; border-radius: 12px; font-weight: 700; font-size: 17px;
         }
         .cta:hover { text-decoration: none; opacity: .92; }
         .cta-sub { display: block; margin-top: 14px; color: var(--text-dim); font-size: 13px; }
+        .hero-downloads {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .cta.download-cta {
+            flex-direction: column;
+            gap: 4px;
+            line-height: 1.15;
+        }
+        .cta .download-version-chip {
+            font-size: 12px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.82);
+        }
 
         main { padding: 72px 0; }
         section { margin-bottom: 80px; scroll-margin-top: 94px; }
@@ -634,6 +715,23 @@
             gap: 12px;
             flex-wrap: wrap;
         }
+        .download-note {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        .download-note strong {
+            color: var(--text-heading);
+            font-weight: 800;
+        }
+        .cloud-link {
+            border-color: rgba(196, 181, 253, 0.32);
+            background: rgba(196, 181, 253, 0.08);
+        }
         .secondary-link {
             display: inline-flex;
             align-items: center;
@@ -732,6 +830,20 @@
                 min-height: 34px;
                 padding: 8px 12px;
             }
+            .download-popover {
+                right: -2px;
+                width: min(260px, calc(100vw - 28px));
+            }
+            .hero-downloads {
+                align-items: stretch;
+                flex-direction: column;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .hero-downloads .cta,
+            .hero-downloads .secondary-link {
+                width: 100%;
+            }
             .buy-actions {
                 align-items: stretch;
                 flex-direction: column;
@@ -796,7 +908,26 @@
             <div class="nav-actions">
                 <button id="langBtn" class="nav-control" aria-label="Switch language">English</button>
                 <button id="themeBtn" class="nav-control" aria-label="Toggle theme"><span id="themeIcon">☀</span></button>
-                <a class="nav-download" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="navDownload">立即下载</a>
+                <div class="nav-download-wrap">
+                    <a class="nav-download" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="navDownload">官网最新版</a>
+                    <div class="download-popover" role="tooltip">
+                        <p class="download-popover-title" data-i18n="downloadWaysTitle">可选择两种下载方式</p>
+                        <a class="download-way" href="WePlayPowerSetup-0.2.189.exe" download>
+                            <span>
+                                <strong data-i18n="officialLatestWay">官网最新版</strong>
+                                <small><span data-download-version>v0.2.189</span> · <span data-i18n="officialLatestTip">优先推荐</span></small>
+                            </span>
+                            <span>↓</span>
+                        </a>
+                        <a class="download-way" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer">
+                            <span>
+                                <strong data-i18n="cloudBackupWay">网盘备用下载</strong>
+                                <small data-i18n="cloudMayLag">可能不是最新版本</small>
+                            </span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -813,7 +944,13 @@
                 <span class="badge" data-i18n="badgeEasy">小白易用</span>
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
-            <a class="cta" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="ctaHero">免费下载体验</a>
+            <div class="hero-downloads">
+                <a class="cta download-cta" href="WePlayPowerSetup-0.2.189.exe" download>
+                    <span data-i18n="ctaHero">下载最新版</span>
+                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
+                </a>
+                <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
+            </div>
             <span class="cta-sub" data-i18n="ctaHeroSub">部分功能免激活可用，授权码解锁完整能力</span>
         </div>
     </header>
@@ -990,8 +1127,16 @@
                 <div class="price" data-i18n="price">部分功能免费</div>
                 <div class="price-note" data-i18n="priceNote">授权码可解锁完整游戏库与高级能力</div>
                 <div class="buy-actions">
-                    <a class="cta" href="WePlayPowerSetup-0.2.189.exe" download data-i18n="buyDownload">下载 Windows 安装包</a>
+                    <a class="cta download-cta" href="WePlayPowerSetup-0.2.189.exe" download>
+                        <span data-i18n="buyDownload">官网最新版下载</span>
+                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
+                    </a>
+                    <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
                     <a class="secondary-link" href="mailto:WePlayPower@gmail.com" data-i18n="buyCta">联系官方客服</a>
+                </div>
+                <div class="download-note">
+                    <span><strong data-i18n="downloadLatestStrong">本站下载</strong> <span data-i18n="downloadLatestNote">为当前最新版本。</span></span>
+                    <span data-i18n="cloudStaleNote">网盘文件可能不是最新版本，请优先使用本站下载。</span>
                 </div>
                 <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:WePlayPower@gmail.com">WePlayPower@gmail.com</a></div>
                 <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权码</span></div>
@@ -1014,15 +1159,22 @@
                 navGames: "游戏支持",
                 navFaq: "常见问题",
                 navLicense: "授权说明",
-                navDownload: "立即下载",
+                navDownload: "官网最新版",
+                downloadWaysTitle: "可选择两种下载方式",
+                officialLatestWay: "官网最新版",
+                officialLatestTip: "优先推荐",
+                cloudBackupWay: "网盘备用下载",
+                cloudMayLag: "可能不是最新版本",
                 slogan: "让我们的游戏更强大",
                 tagline: "一键开启单机游戏的无限可能，免账号、可离线、小白也能轻松上手。",
                 badgeNoAccount: "免账号",
                 badgeOffline: "可离线使用",
                 badgeLicense: "授权码激活",
                 badgeEasy: "小白易用",
-                ctaHero: "免费下载体验",
+                ctaHero: "下载最新版",
                 ctaHeroSub: "部分功能免激活可用，授权码解锁完整能力",
+                latestVersionLabel: "官网最新版",
+                cloudBackupShort: "网盘备用",
                 productEyebrow: "产品界面预览",
                 productTitle: "控制台式修改项管理",
                 productDesc: "以老头环修改项界面为例，开关、数值、快捷键都集中在同一屏，启动强化后按需调整即可。",
@@ -1077,8 +1229,12 @@
                 buyDesc: "下载安装后即可使用部分修改功能。如需解锁全部游戏和高级功能，可购买授权码激活。",
                 price: "部分功能免费",
                 priceNote: "授权码可解锁完整游戏库与高级能力",
-                buyDownload: "下载 Windows 安装包",
+                buyDownload: "官网最新版下载",
+                cloudDownload: "网盘备用下载",
                 buyCta: "联系官方客服",
+                downloadLatestStrong: "本站下载",
+                downloadLatestNote: "为当前最新版本。",
+                cloudStaleNote: "网盘文件可能不是最新版本，请优先使用本站下载。",
                 contactLabel: "联系邮箱：",
                 freeLabel: "免费用户",
                 freeNote: "可以直接使用部分基础修改功能，无需先购买授权码",
@@ -1091,15 +1247,22 @@
                 navGames: "Games",
                 navFaq: "FAQ",
                 navLicense: "License",
-                navDownload: "Download",
+                navDownload: "Latest Official",
+                downloadWaysTitle: "Two download options",
+                officialLatestWay: "Latest official build",
+                officialLatestTip: "Recommended",
+                cloudBackupWay: "Cloud backup download",
+                cloudMayLag: "May not be the latest version",
                 slogan: "Make Our Games Stronger",
                 tagline: "Unlock endless possibilities for single-player games. No account, works offline, easy for everyone.",
                 badgeNoAccount: "No Account",
                 badgeOffline: "Works Offline",
                 badgeLicense: "License Key",
                 badgeEasy: "Easy to Use",
-                ctaHero: "Free Download",
+                ctaHero: "Download Latest",
                 ctaHeroSub: "Some features are free; license unlocks the full library.",
+                latestVersionLabel: "Latest official",
+                cloudBackupShort: "Cloud Backup",
                 productEyebrow: "Product Preview",
                 productTitle: "Control-panel boost management",
                 productDesc: "Using an Elden Ring boost screen as the example, toggles, values, and hotkeys stay together so you can adjust everything after power starts.",
@@ -1154,8 +1317,12 @@
                 buyDesc: "Download and use some boosts right away. Purchase a license key to unlock the full library and advanced features.",
                 price: "Free Features Available",
                 priceNote: "License unlocks the full game library and advanced features",
-                buyDownload: "Download Windows Installer",
+                buyDownload: "Download Latest Installer",
+                cloudDownload: "Cloud Backup Download",
                 buyCta: "Contact Official Support",
+                downloadLatestStrong: "Website download",
+                downloadLatestNote: "is the current latest version.",
+                cloudStaleNote: "The cloud drive file may not be the newest version. Prefer the website download.",
                 contactLabel: "Email: ",
                 freeLabel: "Free Users",
                 freeNote: "Can use some basic boosts directly without purchasing a license first.",
@@ -1174,6 +1341,23 @@
         }
         let theme = storedTheme === 'light' ? 'light' : 'dark';
 
+        function getInstallerVersion() {
+            const downloadLink = document.querySelector('a[download][href*="Setup"]');
+            const href = downloadLink ? downloadLink.getAttribute('href') || '' : '';
+            const match = href.match(/Setup-(\d+(?:\.\d+)*)\.exe/i);
+            return match ? `v${match[1]}` : '';
+        }
+
+        function applyDownloadVersion() {
+            const version = getInstallerVersion();
+            if (!version) {
+                return;
+            }
+            document.querySelectorAll('[data-download-version]').forEach(el => {
+                el.textContent = version;
+            });
+        }
+
         function applyLang() {
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1183,6 +1367,7 @@
                 }
             });
             langBtn.textContent = lang === 'zh' ? 'English' : '中文';
+            applyDownloadVersion();
         }
 
         function applyTheme() {
