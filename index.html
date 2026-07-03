@@ -88,6 +88,31 @@
             white-space: nowrap;
         }
         .nav-brand:hover { text-decoration: none; }
+        .site-beta-chip {
+            display: inline-grid;
+            place-items: center;
+            height: 22px;
+            padding: 0 9px;
+            border-radius: 999px;
+            color: #101014;
+            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
+            box-shadow: 0 0 22px rgba(124, 58, 237, 0.28);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .02em;
+            white-space: nowrap;
+            font-style: normal;
+        }
+        .badge.beta {
+            color: #dbeafe;
+            border-color: rgba(96, 165, 250, 0.36);
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(124, 58, 237, 0.12));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 24px rgba(96,165,250,.12);
+        }
+        [data-theme="light"] .badge.beta {
+            color: #1d4ed8;
+            background: rgba(96, 165, 250, 0.1);
+        }
         .nav-brand img {
             width: 34px;
             height: 34px;
@@ -897,6 +922,7 @@
             <a class="nav-brand" href="#top" aria-label="WePlayPower">
                 <img src="logo.png" alt="">
                 <span>WePlayPower</span>
+                <em class="site-beta-chip" data-i18n="betaTestingShort">Beta 测试中</em>
             </a>
             <div class="nav-links">
                 <a href="#features" data-i18n="navFeatures">功能亮点</a>
@@ -919,7 +945,7 @@
                             </span>
                             <span>↓</span>
                         </a>
-                        <a class="download-way" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer">
+                        <a class="download-way" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer">
                             <span>
                                 <strong data-i18n="cloudBackupWay">网盘备用下载</strong>
                                 <small data-i18n="cloudMayLag">可能不是最新版本</small>
@@ -941,6 +967,7 @@
             <div class="hero-badges">
                 <span class="badge primary" data-i18n="badgeNoAccount">免账号</span>
                 <span class="badge primary" data-i18n="badgeOffline">可离线使用</span>
+                <span class="badge beta" data-i18n="betaTesting">Beta 版本测试中</span>
                 <span class="badge" data-i18n="badgeEasy">小白易用</span>
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
@@ -949,7 +976,7 @@
                     <span data-i18n="ctaHero">下载最新版</span>
                     <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
                 </a>
-                <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
+                <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
             </div>
             <span class="cta-sub" data-i18n="ctaHeroSub">部分功能免激活可用，授权码解锁完整能力</span>
         </div>
@@ -1131,7 +1158,7 @@
                         <span data-i18n="buyDownload">官网最新版下载</span>
                         <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
                     </a>
-                    <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/W7dfjgn1" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
+                    <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
                     <a class="secondary-link" href="mailto:WePlayPower@gmail.com" data-i18n="buyCta">联系官方客服</a>
                 </div>
                 <div class="download-note">
@@ -1169,6 +1196,8 @@
                 tagline: "一键开启单机游戏的无限可能，免账号、可离线、小白也能轻松上手。",
                 badgeNoAccount: "免账号",
                 badgeOffline: "可离线使用",
+                betaTesting: "Beta 版本测试中",
+                betaTestingShort: "Beta 测试中",
                 badgeLicense: "授权码激活",
                 badgeEasy: "小白易用",
                 ctaHero: "下载最新版",
@@ -1257,6 +1286,8 @@
                 tagline: "Unlock endless possibilities for single-player games. No account, works offline, easy for everyone.",
                 badgeNoAccount: "No Account",
                 badgeOffline: "Works Offline",
+                betaTesting: "Beta testing build",
+                betaTestingShort: "Beta",
                 badgeLicense: "License Key",
                 badgeEasy: "Easy to Use",
                 ctaHero: "Download Latest",
