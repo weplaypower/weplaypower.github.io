@@ -88,31 +88,6 @@
             white-space: nowrap;
         }
         .nav-brand:hover { text-decoration: none; }
-        .site-beta-chip {
-            display: inline-grid;
-            place-items: center;
-            height: 22px;
-            padding: 0 9px;
-            border-radius: 999px;
-            color: #101014;
-            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
-            box-shadow: 0 0 22px rgba(124, 58, 237, 0.28);
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: .02em;
-            white-space: nowrap;
-            font-style: normal;
-        }
-        .badge.beta {
-            color: #dbeafe;
-            border-color: rgba(96, 165, 250, 0.36);
-            background: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(124, 58, 237, 0.12));
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 24px rgba(96,165,250,.12);
-        }
-        [data-theme="light"] .badge.beta {
-            color: #1d4ed8;
-            background: rgba(96, 165, 250, 0.1);
-        }
         .nav-brand img {
             width: 34px;
             height: 34px;
@@ -360,6 +335,27 @@
             flex-direction: column;
             gap: 4px;
             line-height: 1.15;
+        }
+        .download-version-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .download-beta-chip {
+            display: inline-grid;
+            place-items: center;
+            height: 17px;
+            padding: 0 7px;
+            border-radius: 999px;
+            color: #101014;
+            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
+            box-shadow: 0 0 18px rgba(124, 58, 237, 0.28);
+            font-size: 10px;
+            font-weight: 950;
+            font-style: normal;
+            line-height: 1;
         }
         .cta .download-version-chip {
             font-size: 12px;
@@ -922,7 +918,6 @@
             <a class="nav-brand" href="#top" aria-label="WePlayPower">
                 <img src="logo.png" alt="">
                 <span>WePlayPower</span>
-                <em class="site-beta-chip" data-i18n="betaTestingShort">Beta 测试中</em>
             </a>
             <div class="nav-links">
                 <a href="#features" data-i18n="navFeatures">功能亮点</a>
@@ -941,14 +936,14 @@
                         <a class="download-way" href="WePlayPowerSetup-0.2.203.exe" download>
                             <span>
                                 <strong data-i18n="officialLatestWay">官网最新版</strong>
-                                <small><span data-download-version>v0.2.189</span> · <span data-i18n="officialLatestTip">优先推荐</span></small>
+                                <small><span class="download-version-chip"><span data-download-version>v0.2.189</span><em class="download-beta-chip" data-i18n="betaTestingShort">Beta 测试中</em></span> · <span data-i18n="officialLatestTip">官网直连</span></small>
                             </span>
                             <span>↓</span>
                         </a>
                         <a class="download-way" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer">
                             <span>
                                 <strong data-i18n="cloudBackupWay">网盘备用下载</strong>
-                                <small data-i18n="cloudMayLag">可能不是最新版本</small>
+                                <small data-i18n="cloudMayLag">网盘下载可能速度更快</small>
                             </span>
                             <span>↗</span>
                         </a>
@@ -967,14 +962,13 @@
             <div class="hero-badges">
                 <span class="badge primary" data-i18n="badgeNoAccount">免账号</span>
                 <span class="badge primary" data-i18n="badgeOffline">可离线使用</span>
-                <span class="badge beta" data-i18n="betaTesting">Beta 版本测试中</span>
                 <span class="badge" data-i18n="badgeEasy">小白易用</span>
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
             <div class="hero-downloads">
                 <a class="cta download-cta" href="WePlayPowerSetup-0.2.203.exe" download>
                     <span data-i18n="ctaHero">下载最新版</span>
-                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
+                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span><em class="download-beta-chip" data-i18n="betaTestingShort">Beta 测试中</em></small>
                 </a>
                 <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
             </div>
@@ -1156,14 +1150,14 @@
                 <div class="buy-actions">
                     <a class="cta download-cta" href="WePlayPowerSetup-0.2.203.exe" download>
                         <span data-i18n="buyDownload">官网最新版下载</span>
-                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span></small>
+                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.189</span><em class="download-beta-chip" data-i18n="betaTestingShort">Beta 测试中</em></small>
                     </a>
                     <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/DOdiWVJV" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
                     <a class="secondary-link" href="mailto:WePlayPower@gmail.com" data-i18n="buyCta">联系官方客服</a>
                 </div>
                 <div class="download-note">
                     <span><strong data-i18n="downloadLatestStrong">本站下载</strong> <span data-i18n="downloadLatestNote">为当前最新版本。</span></span>
-                    <span data-i18n="cloudStaleNote">网盘文件可能不是最新版本，请优先使用本站下载。</span>
+                    <span data-i18n="cloudStaleNote">网盘下载可能速度更快。</span>
                 </div>
                 <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:WePlayPower@gmail.com">WePlayPower@gmail.com</a></div>
                 <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权码</span></div>
@@ -1189,9 +1183,9 @@
                 navDownload: "官网最新版",
                 downloadWaysTitle: "可选择两种下载方式",
                 officialLatestWay: "官网最新版",
-                officialLatestTip: "优先推荐",
+                officialLatestTip: "官网直连",
                 cloudBackupWay: "网盘备用下载",
-                cloudMayLag: "可能不是最新版本",
+                cloudMayLag: "网盘下载可能速度更快",
                 slogan: "让我们的游戏更强大",
                 tagline: "一键开启单机游戏的无限可能，免账号、可离线、小白也能轻松上手。",
                 badgeNoAccount: "免账号",
@@ -1263,7 +1257,7 @@
                 buyCta: "联系官方客服",
                 downloadLatestStrong: "本站下载",
                 downloadLatestNote: "为当前最新版本。",
-                cloudStaleNote: "网盘文件可能不是最新版本，请优先使用本站下载。",
+                cloudStaleNote: "网盘下载可能速度更快。",
                 contactLabel: "联系邮箱：",
                 freeLabel: "免费用户",
                 freeNote: "可以直接使用部分基础修改功能，无需先购买授权码",
@@ -1279,9 +1273,9 @@
                 navDownload: "Latest Official",
                 downloadWaysTitle: "Two download options",
                 officialLatestWay: "Latest official build",
-                officialLatestTip: "Recommended",
+                officialLatestTip: "Official direct",
                 cloudBackupWay: "Cloud backup download",
-                cloudMayLag: "May not be the latest version",
+                cloudMayLag: "Cloud download may be faster",
                 slogan: "Make Our Games Stronger",
                 tagline: "Unlock endless possibilities for single-player games. No account, works offline, easy for everyone.",
                 badgeNoAccount: "No Account",
@@ -1353,7 +1347,7 @@
                 buyCta: "Contact Official Support",
                 downloadLatestStrong: "Website download",
                 downloadLatestNote: "is the current latest version.",
-                cloudStaleNote: "The cloud drive file may not be the newest version. Prefer the website download.",
+                cloudStaleNote: "Cloud download may be faster.",
                 contactLabel: "Email: ",
                 freeLabel: "Free Users",
                 freeNote: "Can use some basic boosts directly without purchasing a license first.",
