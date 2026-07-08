@@ -977,6 +977,10 @@
             border-color: rgba(196, 181, 253, 0.32);
             background: rgba(196, 181, 253, 0.08);
         }
+        .purchase-link {
+            border-color: rgba(96, 165, 250, 0.42);
+            background: rgba(96, 165, 250, 0.10);
+        }
         .secondary-link {
             display: inline-flex;
             align-items: center;
@@ -996,6 +1000,40 @@
             background: rgba(255, 255, 255, 0.09);
         }
         [data-theme="light"] .secondary-link { background: rgba(24, 24, 27, 0.04); }
+        .buy-contact-panel {
+            display: flex;
+            justify-content: center;
+            gap: 10px 14px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .buy-contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            max-width: 100%;
+            min-height: 34px;
+            padding: 7px 12px;
+            border: 1px solid rgba(196, 181, 253, 0.18);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.045);
+        }
+        [data-theme="light"] .buy-contact-item {
+            background: rgba(255,255,255,0.58);
+            border-color: rgba(124,58,237,0.12);
+        }
+        .buy-contact-item strong {
+            color: var(--text-heading);
+            font-weight: 850;
+        }
+        .buy-contact-item a {
+            font-weight: 850;
+            overflow-wrap: anywhere;
+        }
         .contact-email {
             margin-top: 14px;
             color: var(--text-muted);
@@ -1158,13 +1196,13 @@
                 <button id="langBtn" class="nav-control" aria-label="Switch language">English</button>
                 <button id="themeBtn" class="nav-control" aria-label="Toggle theme"><span id="themeIcon">☀</span></button>
                 <div class="nav-download-wrap">
-                    <a class="nav-download" href="WePlayPowerSetup-0.2.259.exe" download data-i18n="navDownload">官网最新版</a>
+                    <a class="nav-download" href="WePlayPowerSetup-0.2.262.exe" download data-i18n="navDownload">官网最新版</a>
                     <div class="download-popover" role="tooltip">
                         <p class="download-popover-title" data-i18n="downloadWaysTitle">可选择两种下载方式</p>
-                        <a class="download-way" href="WePlayPowerSetup-0.2.259.exe" download>
+                        <a class="download-way" href="WePlayPowerSetup-0.2.262.exe" download>
                             <span>
                                 <strong data-i18n="officialLatestWay">官网最新版</strong>
-                                <small><span class="download-version-chip"><span data-download-version>v0.2.259</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></span> · <span data-i18n="officialLatestTip">官网直连</span></small>
+                                <small><span class="download-version-chip"><span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></span> · <span data-i18n="officialLatestTip">官网直连</span></small>
                             </span>
                             <span>↓</span>
                         </a>
@@ -1194,9 +1232,9 @@
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
             <div class="hero-downloads">
-                <a class="cta download-cta" href="WePlayPowerSetup-0.2.259.exe" download>
+                <a class="cta download-cta" href="WePlayPowerSetup-0.2.262.exe" download>
                     <span data-i18n="ctaHero">下载最新版</span>
-                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.259</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
+                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
                 </a>
                 <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/JXeTLbxd" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
             </div>
@@ -1376,7 +1414,7 @@
                 <div class="pricing-panel">
                     <div class="buy-section-title" data-i18n="pricingTitle">授权方案</div>
                     <div class="pricing-grid">
-                        <a class="pricing-card monthly" href="mailto:weplaypower@outlook.com">
+                        <a class="pricing-card monthly" href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer">
                             <div>
                                 <div class="pricing-card-top">
                                     <span data-i18n="monthlyName">包月</span>
@@ -1387,7 +1425,7 @@
                                 <p data-i18n="monthlyNote">适合短期体验</p>
                             </div>
                         </a>
-                        <a class="pricing-card yearly recommended" href="mailto:weplaypower@outlook.com">
+                        <a class="pricing-card yearly recommended" href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer">
                             <div>
                                 <div class="pricing-card-top">
                                     <span data-i18n="yearlyName">包年</span>
@@ -1440,16 +1478,21 @@
                     </div>
                 </div>
                 <div class="buy-actions">
-                    <a class="cta download-cta" href="WePlayPowerSetup-0.2.259.exe" download>
+                    <a class="cta download-cta" href="WePlayPowerSetup-0.2.262.exe" download>
                         <span data-i18n="buyDownload">官网最新版下载</span>
-                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.259</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
+                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
                     </a>
                     <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/JXeTLbxd" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
+                    <a class="secondary-link purchase-link" href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer" data-i18n="buyTradeCta">购买授权码</a>
                     <a class="secondary-link" href="mailto:weplaypower@outlook.com" data-i18n="buyCta">联系官方客服</a>
                 </div>
                 <div class="download-note">
                     <span><strong data-i18n="downloadLatestStrong">本站下载</strong> <span data-i18n="downloadLatestNote">为当前最新版本。</span></span>
                     <span data-i18n="cloudStaleNote">网盘下载可能速度更快。</span>
+                </div>
+                <div class="buy-contact-panel">
+                    <span class="buy-contact-item"><strong data-i18n="buyContactQQLabel">购买联系 QQ：</strong> <a href="tencent://message/?uin=2545260683&amp;Site=WePlayPower&amp;Menu=yes">2545260683</a></span>
+                    <span class="buy-contact-item"><strong data-i18n="buyTradeUrlLabel">购买交易网址：</strong> <a href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer">https://68n.cn/bFOC8</a></span>
                 </div>
                 <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:weplaypower@outlook.com">weplaypower@outlook.com</a></div>
             </div>
@@ -1561,10 +1604,13 @@
                 licensePaidHistory: "可按需切换并下载对应注入文件",
                 buyDownload: "官网最新版下载",
                 cloudDownload: "网盘备用下载",
+                buyTradeCta: "购买授权码",
                 buyCta: "联系官方客服",
                 downloadLatestStrong: "本站下载",
                 downloadLatestNote: "为当前最新版本。",
                 cloudStaleNote: "网盘下载可能速度更快。",
+                buyContactQQLabel: "购买联系 QQ：",
+                buyTradeUrlLabel: "购买交易网址：",
                 contactLabel: "联系邮箱：",
                 footer: "&copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。"
             },
@@ -1665,10 +1711,13 @@
                 licensePaidHistory: "Switch and download matching modules as needed",
                 buyDownload: "Download Latest Installer",
                 cloudDownload: "Cloud Backup Download",
+                buyTradeCta: "Buy License Key",
                 buyCta: "Contact Official Support",
                 downloadLatestStrong: "Website download",
                 downloadLatestNote: "is the current latest version.",
                 cloudStaleNote: "Cloud download may be faster.",
+                buyContactQQLabel: "Purchase QQ: ",
+                buyTradeUrlLabel: "Purchase Link: ",
                 contactLabel: "Email: ",
                 footer: "\u0026copy; 2026 WePlayPower. All rights reserved. Unauthorized copying, distribution, or reverse engineering is prohibited."
             }
@@ -1748,6 +1797,7 @@
 
 </body>
 </html>
+
 
 
 
