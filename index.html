@@ -722,13 +722,237 @@
         .faq-item p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
 
         .buy-box {
+            position: relative;
+            overflow: hidden;
             background: var(--buy-bg);
             border: 1px solid rgba(124,58,237,0.25); border-radius: 24px;
             padding: 48px 36px; text-align: center;
         }
+        .buy-box::before {
+            content: "";
+            position: absolute;
+            inset: -22% auto auto 50%;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(196, 181, 253, 0.18), transparent 62%);
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        .buy-box > * {
+            position: relative;
+            z-index: 1;
+        }
         [data-theme="light"] .buy-box { border-color: rgba(124,58,237,0.15); }
         .buy-box h2 { margin-bottom: 14px; }
         .buy-box p { color: var(--text-muted); max-width: 560px; margin: 0 auto 28px; }
+        .buy-logo {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 22px;
+            object-fit: contain;
+            filter: drop-shadow(0 16px 40px var(--shadow));
+        }
+        .pricing-panel,
+        .license-compare-panel {
+            max-width: 860px;
+            margin: 0 auto 18px;
+            padding: 16px;
+            border: 1px solid rgba(196, 181, 253, 0.18);
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025)),
+                rgba(10,10,12,0.28);
+        }
+        [data-theme="light"] .pricing-panel,
+        [data-theme="light"] .license-compare-panel {
+            background: rgba(255,255,255,0.62);
+            border-color: rgba(124,58,237,0.14);
+        }
+        .buy-section-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            color: var(--text-heading);
+            font-size: 15px;
+            font-weight: 900;
+        }
+        .buy-section-title::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
+            box-shadow: 0 0 18px rgba(196, 181, 253, 0.6);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .pricing-card {
+            position: relative;
+            display: grid;
+            align-content: space-between;
+            min-height: 158px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 16px;
+            color: var(--text-heading);
+            text-align: left;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.032)),
+                rgba(14,14,18,0.64);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+            transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+        }
+        .pricing-card:hover {
+            text-decoration: none;
+            transform: translateY(-2px);
+            border-color: rgba(196, 181, 253, 0.42);
+            box-shadow: 0 18px 46px rgba(124, 58, 237, 0.16), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .pricing-card.recommended {
+            border-color: rgba(196, 181, 253, 0.38);
+            background:
+                radial-gradient(circle at 84% 4%, rgba(96, 165, 250, 0.24), transparent 32%),
+                linear-gradient(135deg, rgba(124,58,237,0.20), rgba(37,99,235,0.12) 52%, rgba(196,181,253,0.08)),
+                rgba(14,14,18,0.76);
+        }
+        [data-theme="light"] .pricing-card {
+            background: rgba(255,255,255,0.74);
+            border-color: rgba(124,58,237,0.12);
+        }
+        .pricing-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .pricing-card-top span,
+        .pricing-card-top b,
+        .pricing-save {
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 0 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+        }
+        .pricing-card-top span {
+            color: var(--text);
+            background: rgba(255,255,255,0.08);
+        }
+        [data-theme="light"] .pricing-card-top span { background: rgba(24,24,27,0.06); }
+        .pricing-card-top b,
+        .pricing-save {
+            color: #101014;
+            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
+        }
+        .pricing-value {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        .pricing-value em {
+            color: var(--text-muted);
+            font-style: normal;
+            font-size: 18px;
+            font-weight: 900;
+        }
+        .pricing-value strong {
+            color: var(--text-heading);
+            font-size: clamp(36px, 5vw, 52px);
+            line-height: 1;
+            font-weight: 950;
+            letter-spacing: -0.02em;
+        }
+        .pricing-value small {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .pricing-card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .pricing-save {
+            justify-self: start;
+            margin-top: 14px;
+        }
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .plan-card {
+            position: relative;
+            overflow: hidden;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 16px;
+            background: rgba(14,14,18,0.58);
+            text-align: left;
+        }
+        .plan-card.active {
+            border-color: rgba(196, 181, 253, 0.36);
+            background:
+                linear-gradient(135deg, rgba(124,58,237,0.18), rgba(37,99,235,0.10)),
+                rgba(14,14,18,0.62);
+        }
+        [data-theme="light"] .plan-card {
+            background: rgba(255,255,255,0.70);
+            border-color: rgba(124,58,237,0.12);
+        }
+        .plan-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .plan-head span {
+            color: var(--text-dim);
+            font-size: 12px;
+            font-weight: 900;
+        }
+        .plan-head strong {
+            color: var(--text-heading);
+            font-size: 17px;
+            font-weight: 950;
+        }
+        .feature-stack {
+            display: grid;
+            gap: 10px;
+        }
+        .feature-row {
+            display: grid;
+            grid-template-columns: minmax(96px, 0.42fr) minmax(0, 1fr);
+            align-items: center;
+            gap: 10px;
+            min-height: 42px;
+            padding: 9px 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.055);
+        }
+        [data-theme="light"] .feature-row { background: rgba(24,24,27,0.045); }
+        .feature-row span {
+            color: var(--text-dim);
+            font-size: 12px;
+            font-weight: 900;
+        }
+        .feature-row strong {
+            color: var(--text-heading);
+            font-size: 14px;
+            line-height: 1.35;
+            font-weight: 850;
+        }
         .buy-actions {
             display: flex;
             align-items: center;
@@ -772,26 +996,12 @@
             background: rgba(255, 255, 255, 0.09);
         }
         [data-theme="light"] .secondary-link { background: rgba(24, 24, 27, 0.04); }
-        .free-note {
-            background: var(--free-bg);
-            border: 1px dashed rgba(124,58,237,0.35);
-            border-radius: 14px;
-            padding: 16px 22px;
-            text-align: center;
-            color: var(--text);
-            font-size: 15px;
-            margin-top: 18px;
-        }
-        [data-theme="light"] .free-note { border-color: rgba(124,58,237,0.22); }
-        .free-note strong { color: var(--accent); }
         .contact-email {
             margin-top: 14px;
             color: var(--text-muted);
             font-size: 14px;
         }
         .contact-email a { font-weight: 600; }
-        .price { font-size: 42px; font-weight: 800; color: var(--text-heading); margin-bottom: 8px; }
-        .price-note { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
 
         footer {
             text-align: center; padding: 44px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 14px;
@@ -827,7 +1037,6 @@
             h1 { font-size: 34px; }
             h2 { font-size: 24px; }
             header { padding: 124px 0 44px; }
-            .price { font-size: 34px; }
             .site-nav { padding: 10px 0; }
             .nav-inner {
                 padding: 0 14px;
@@ -864,6 +1073,25 @@
             .hero-downloads .cta,
             .hero-downloads .secondary-link {
                 width: 100%;
+            }
+            .buy-box {
+                padding: 36px 16px;
+            }
+            .pricing-panel,
+            .license-compare-panel {
+                padding: 12px;
+            }
+            .pricing-grid,
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card {
+                min-height: 144px;
+                padding: 17px;
+            }
+            .feature-row {
+                grid-template-columns: 1fr;
+                gap: 4px;
             }
             .buy-actions {
                 align-items: stretch;
@@ -1142,25 +1370,88 @@
 
         <section id="buy">
             <div class="buy-box">
-                <img class="logo-img" src="logo.png" alt="WePlayPower Logo" style="width:72px;height:72px;margin-bottom:22px;">
+                <img class="buy-logo" src="logo.png" alt="WePlayPower Logo">
                 <h2 data-i18n="buyTitle">免费体验，按需升级</h2>
                 <p data-i18n="buyDesc">下载安装后即可使用部分修改功能。如需解锁全部游戏和高级功能，可购买授权码激活。</p>
-                <div class="price" data-i18n="price">部分功能免费</div>
-                <div class="price-note" data-i18n="priceNote">授权码可解锁完整游戏库与高级能力</div>
+                <div class="pricing-panel">
+                    <div class="buy-section-title" data-i18n="pricingTitle">授权方案</div>
+                    <div class="pricing-grid">
+                        <a class="pricing-card monthly" href="mailto:weplaypower@outlook.com">
+                            <div>
+                                <div class="pricing-card-top">
+                                    <span data-i18n="monthlyName">包月</span>
+                                </div>
+                                <div class="pricing-value">
+                                    <em>¥</em><strong>16.8</strong><small data-i18n="monthlyName">包月</small>
+                                </div>
+                                <p data-i18n="monthlyNote">适合短期体验</p>
+                            </div>
+                        </a>
+                        <a class="pricing-card yearly recommended" href="mailto:weplaypower@outlook.com">
+                            <div>
+                                <div class="pricing-card-top">
+                                    <span data-i18n="yearlyName">包年</span>
+                                    <b data-i18n="recommend">推荐</b>
+                                </div>
+                                <div class="pricing-value">
+                                    <em>¥</em><strong>168.0</strong><small data-i18n="yearlyName">包年</small>
+                                </div>
+                                <p data-i18n="yearlyNote">长期使用更划算</p>
+                                <i class="pricing-save" data-i18n="save">比月付省 33.6</i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="license-compare-panel">
+                    <div class="buy-section-title" data-i18n="licenseCompareTitle">功能对比</div>
+                    <div class="plan-grid">
+                        <article class="plan-card free">
+                            <div class="plan-head">
+                                <span data-i18n="licenseCurrentStatus">当前状态</span>
+                                <strong data-i18n="licenseFreePlan">未激活</strong>
+                            </div>
+                            <div class="feature-stack">
+                                <div class="feature-row">
+                                    <span data-i18n="licenseFeatureModifiers">游戏修改项</span>
+                                    <strong data-i18n="licenseFreeModifiers">仅可以使用部分修改项</strong>
+                                </div>
+                                <div class="feature-row">
+                                    <span data-i18n="licenseFeatureHistory">历史版本资料</span>
+                                    <strong data-i18n="licenseFreeHistory">不可切换</strong>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="plan-card active">
+                            <div class="plan-head">
+                                <span data-i18n="licenseActivate">激活授权</span>
+                                <strong data-i18n="licensePaidPlan">激活后</strong>
+                            </div>
+                            <div class="feature-stack">
+                                <div class="feature-row">
+                                    <span data-i18n="licenseFeatureModifiers">游戏修改项</span>
+                                    <strong data-i18n="licensePaidModifiers">全部修改项可用</strong>
+                                </div>
+                                <div class="feature-row">
+                                    <span data-i18n="licenseFeatureHistory">历史版本资料</span>
+                                    <strong data-i18n="licensePaidHistory">可按需切换并下载对应注入文件</strong>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
                 <div class="buy-actions">
                     <a class="cta download-cta" href="WePlayPowerSetup-0.2.259.exe" download>
                         <span data-i18n="buyDownload">官网最新版下载</span>
                         <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.259</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
                     </a>
                     <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/JXeTLbxd" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
-                    <a class="secondary-link" href="mailto:WePlayPower@gmail.com" data-i18n="buyCta">联系官方客服</a>
+                    <a class="secondary-link" href="mailto:weplaypower@outlook.com" data-i18n="buyCta">联系官方客服</a>
                 </div>
                 <div class="download-note">
                     <span><strong data-i18n="downloadLatestStrong">本站下载</strong> <span data-i18n="downloadLatestNote">为当前最新版本。</span></span>
                     <span data-i18n="cloudStaleNote">网盘下载可能速度更快。</span>
                 </div>
-                <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:WePlayPower@gmail.com">WePlayPower@gmail.com</a></div>
-                <div class="free-note"><strong data-i18n="freeLabel">免费用户</strong> <span data-i18n="freeNote">可以直接使用部分基础修改功能，无需先购买授权码</span></div>
+                <div class="contact-email"><span data-i18n="contactLabel">联系邮箱：</span> <a href="mailto:weplaypower@outlook.com">weplaypower@outlook.com</a></div>
             </div>
         </section>
     </main>
@@ -1250,8 +1541,24 @@
                 faq5Desc: "授权到期后，可在软件内输入新的授权码续期，原有设置和游戏数据不会丢失。",
                 buyTitle: "免费体验，按需升级",
                 buyDesc: "下载安装后即可使用部分修改功能。如需解锁全部游戏和高级功能，可购买授权码激活。",
-                price: "部分功能免费",
-                priceNote: "授权码可解锁完整游戏库与高级能力",
+                pricingTitle: "授权方案",
+                monthlyName: "包月",
+                monthlyNote: "适合短期体验",
+                yearlyName: "包年",
+                yearlyNote: "长期使用更划算",
+                recommend: "推荐",
+                save: "比月付省 33.6",
+                licenseCompareTitle: "功能对比",
+                licenseCurrentStatus: "当前状态",
+                licenseFreePlan: "未激活",
+                licenseActivate: "激活授权",
+                licensePaidPlan: "激活后",
+                licenseFeatureModifiers: "游戏修改项",
+                licenseFreeModifiers: "仅可以使用部分修改项",
+                licensePaidModifiers: "全部修改项可用",
+                licenseFeatureHistory: "历史版本资料",
+                licenseFreeHistory: "不可切换",
+                licensePaidHistory: "可按需切换并下载对应注入文件",
                 buyDownload: "官网最新版下载",
                 cloudDownload: "网盘备用下载",
                 buyCta: "联系官方客服",
@@ -1259,8 +1566,6 @@
                 downloadLatestNote: "为当前最新版本。",
                 cloudStaleNote: "网盘下载可能速度更快。",
                 contactLabel: "联系邮箱：",
-                freeLabel: "免费用户",
-                freeNote: "可以直接使用部分基础修改功能，无需先购买授权码",
                 footer: "&copy; 2026 WePlayPower. 保留所有权利。未经授权不得复制、分发或逆向工程。"
             },
             en: {
@@ -1340,8 +1645,24 @@
                 faq5Desc: "When your license expires, you can enter a new key to renew. Your settings and game data will remain intact.",
                 buyTitle: "Try Free, Upgrade Anytime",
                 buyDesc: "Download and use some boosts right away. Purchase a license key to unlock the full library and advanced features.",
-                price: "Free Features Available",
-                priceNote: "License unlocks the full game library and advanced features",
+                pricingTitle: "Plans",
+                monthlyName: "Monthly",
+                monthlyNote: "Best for short-term use",
+                yearlyName: "Yearly",
+                yearlyNote: "Best value for long-term use",
+                recommend: "Recommended",
+                save: "Save 33.6 vs monthly",
+                licenseCompareTitle: "Feature Comparison",
+                licenseCurrentStatus: "Current Status",
+                licenseFreePlan: "Unactivated",
+                licenseActivate: "Activate License",
+                licensePaidPlan: "After Activation",
+                licenseFeatureModifiers: "Game Boosts",
+                licenseFreeModifiers: "Only some boosts are available",
+                licensePaidModifiers: "All boosts are available",
+                licenseFeatureHistory: "Historical Versions",
+                licenseFreeHistory: "Switching unavailable",
+                licensePaidHistory: "Switch and download matching modules as needed",
                 buyDownload: "Download Latest Installer",
                 cloudDownload: "Cloud Backup Download",
                 buyCta: "Contact Official Support",
@@ -1349,8 +1670,6 @@
                 downloadLatestNote: "is the current latest version.",
                 cloudStaleNote: "Cloud download may be faster.",
                 contactLabel: "Email: ",
-                freeLabel: "Free Users",
-                freeNote: "Can use some basic boosts directly without purchasing a license first.",
                 footer: "\u0026copy; 2026 WePlayPower. All rights reserved. Unauthorized copying, distribution, or reverse engineering is prohibited."
             }
         };
