@@ -793,8 +793,8 @@
         }
         .pricing-card {
             position: relative;
-            display: grid;
-            align-content: space-between;
+            display: flex;
+            flex-direction: column;
             min-height: 158px;
             padding: 20px;
             border: 1px solid rgba(255,255,255,0.10);
@@ -812,6 +812,12 @@
             transform: translateY(-2px);
             border-color: rgba(196, 181, 253, 0.42);
             box-shadow: 0 18px 46px rgba(124, 58, 237, 0.16), inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .pricing-card > div {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100%;
         }
         .pricing-card.recommended {
             border-color: rgba(196, 181, 253, 0.38);
@@ -882,9 +888,32 @@
             font-size: 14px;
             line-height: 1.5;
         }
+        .pricing-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 14px;
+        }
+        .pricing-buy-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            margin-left: auto;
+            padding: 8px 16px;
+            border-radius: 10px;
+            color: #101014;
+            background: linear-gradient(135deg, #c4b5fd, #60a5fa);
+            font-size: 14px;
+            font-weight: 950;
+            box-shadow: 0 12px 28px rgba(96, 165, 250, 0.18);
+        }
         .pricing-save {
             justify-self: start;
-            margin-top: 14px;
+            margin-top: 0;
         }
         .plan-grid {
             display: grid;
@@ -1196,13 +1225,13 @@
                 <button id="langBtn" class="nav-control" aria-label="Switch language">English</button>
                 <button id="themeBtn" class="nav-control" aria-label="Toggle theme"><span id="themeIcon">☀</span></button>
                 <div class="nav-download-wrap">
-                    <a class="nav-download" href="WePlayPowerSetup-0.2.262.exe" download data-i18n="navDownload">官网最新版</a>
+                    <a class="nav-download" href="WePlayPowerSetup-0.2.311.exe" download data-i18n="navDownload">官网最新版</a>
                     <div class="download-popover" role="tooltip">
                         <p class="download-popover-title" data-i18n="downloadWaysTitle">可选择两种下载方式</p>
-                        <a class="download-way" href="WePlayPowerSetup-0.2.262.exe" download>
+                        <a class="download-way" href="WePlayPowerSetup-0.2.311.exe" download>
                             <span>
                                 <strong data-i18n="officialLatestWay">官网最新版</strong>
-                                <small><span class="download-version-chip"><span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></span> · <span data-i18n="officialLatestTip">官网直连</span></small>
+                                <small><span class="download-version-chip"><span data-download-version>v0.2.311</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></span> · <span data-i18n="officialLatestTip">官网直连</span></small>
                             </span>
                             <span>↓</span>
                         </a>
@@ -1232,9 +1261,9 @@
                 <span class="badge" data-i18n="badgeLicense">授权码激活</span>
             </div>
             <div class="hero-downloads">
-                <a class="cta download-cta" href="WePlayPowerSetup-0.2.262.exe" download>
+                <a class="cta download-cta" href="WePlayPowerSetup-0.2.311.exe" download>
                     <span data-i18n="ctaHero">下载最新版</span>
-                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
+                    <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.311</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
                 </a>
                 <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/JXeTLbxd" target="_blank" rel="noopener noreferrer" data-i18n="cloudBackupShort">网盘备用</a>
             </div>
@@ -1420,9 +1449,12 @@
                                     <span data-i18n="monthlyName">包月</span>
                                 </div>
                                 <div class="pricing-value">
-                                    <em>¥</em><strong>16.8</strong><small data-i18n="monthlyName">包月</small>
+                                    <em>¥</em><strong>9.9</strong><small data-i18n="monthlyName">包月</small>
                                 </div>
                                 <p data-i18n="monthlyNote">适合短期体验</p>
+                                <div class="pricing-card-footer">
+                                    <span class="pricing-buy-button" data-i18n="buyNow">立即购买</span>
+                                </div>
                             </div>
                         </a>
                         <a class="pricing-card yearly recommended" href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer">
@@ -1432,10 +1464,13 @@
                                     <b data-i18n="recommend">推荐</b>
                                 </div>
                                 <div class="pricing-value">
-                                    <em>¥</em><strong>168.0</strong><small data-i18n="yearlyName">包年</small>
+                                    <em>¥</em><strong>98</strong><small data-i18n="yearlyName">包年</small>
                                 </div>
                                 <p data-i18n="yearlyNote">长期使用更划算</p>
-                                <i class="pricing-save" data-i18n="save">比月付省 33.6</i>
+                                <div class="pricing-card-footer">
+                                    <i class="pricing-save" data-i18n="save">比月付省 20.8</i>
+                                    <span class="pricing-buy-button" data-i18n="buyNow">立即购买</span>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -1478,9 +1513,9 @@
                     </div>
                 </div>
                 <div class="buy-actions">
-                    <a class="cta download-cta" href="WePlayPowerSetup-0.2.262.exe" download>
+                    <a class="cta download-cta" href="WePlayPowerSetup-0.2.311.exe" download>
                         <span data-i18n="buyDownload">官网最新版下载</span>
-                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.262</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
+                        <small class="download-version-chip"><span data-i18n="latestVersionLabel">官网最新版</span> <span data-download-version>v0.2.311</span><em class="download-beta-chip" data-i18n="betaTestingShort">内测版</em></small>
                     </a>
                     <a class="secondary-link cloud-link" href="https://share.feijipan.com/s/JXeTLbxd" target="_blank" rel="noopener noreferrer" data-i18n="cloudDownload">网盘备用下载</a>
                     <a class="secondary-link purchase-link" href="https://68n.cn/bFOC8" target="_blank" rel="noopener noreferrer" data-i18n="buyTradeCta">购买授权码</a>
@@ -1590,7 +1625,8 @@
                 yearlyName: "包年",
                 yearlyNote: "长期使用更划算",
                 recommend: "推荐",
-                save: "比月付省 33.6",
+                save: "比月付省 20.8",
+                buyNow: "立即购买",
                 licenseCompareTitle: "功能对比",
                 licenseCurrentStatus: "当前状态",
                 licenseFreePlan: "未激活",
@@ -1697,7 +1733,8 @@
                 yearlyName: "Yearly",
                 yearlyNote: "Best value for long-term use",
                 recommend: "Recommended",
-                save: "Save 33.6 vs monthly",
+                save: "Save 20.8 vs monthly",
+                buyNow: "Buy Now",
                 licenseCompareTitle: "Feature Comparison",
                 licenseCurrentStatus: "Current Status",
                 licenseFreePlan: "Unactivated",
@@ -1797,6 +1834,8 @@
 
 </body>
 </html>
+
+
 
 
 
